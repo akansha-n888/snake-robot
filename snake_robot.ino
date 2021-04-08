@@ -59,7 +59,7 @@ void loop() {
   SoundSensorval = analogRead(SoundSensor);
 
   /*-----------------------------------------SERVO MOVE SNAKE FORWARD-------------------------------------------*/
- if( Output > distanceThreshold){       //distance > distanceThreshold
+ if( distance > distanceThreshold || Output != 0){       //distance > distanceThreshold
   for (pos = 0; pos <= 180; pos += 10) { // goes from 0 degrees to 180 degrees
     // in steps of 1 degree
     servo1.write(pos);              // tell servo to go to position in variable 'pos'
@@ -80,7 +80,7 @@ void loop() {
  }
 
  /*------------------------------------DON'T LET SNAKE MOVE---------------------------------------------------------*/
- if( Output < distanceThreshold){
+ if( distance < distanceThreshold || Output == 0){
     servo1.write(pos);              // tell servo to go to position in variable 'pos'
     servo2.write(pos);              // tell servo to go to position in variable 'pos'
     //Serial.print("Distance from Target (Less):");
@@ -88,7 +88,7 @@ void loop() {
     //delay(10);
   }
    /*----------------------------------------SWEEP SERRVO FOR RADAR-------------------------------------------------*/ 
- if(Output <= distanceThreshold  && SoundSensorval >= SoundThreshold){ 
+ if(distance <= distanceThreshold  && SoundSensorval >= SoundThreshold){ 
 
   // rotates the servo motor from 0 to 180 degrees
   for(int i=0;i<=180;i++){  
