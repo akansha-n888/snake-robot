@@ -15,6 +15,7 @@ The purpose of this project is to implement an autonomous continuum robot using 
 ## Technologies
 * ArduinoIDE- version 1.8.13
 * Arduino PID Library- version 1.2.0 - by [Brett Beauregard ](https://github.com/br3ttb/Arduino-PID-Library)
+* Radar Emulator - by [Maker Portal](https://makersportal.com/blog/2020/3/26/arduino-raspberry-pi-radar)
 
 ## Design Schematic
 ![Schematic](schematic.PNG)
