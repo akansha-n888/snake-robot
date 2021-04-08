@@ -21,7 +21,7 @@ The purpose of this project is to implement an autonomous continuum robot using 
 > Schematic for Slider Crank Mechanism
 
 ## Circuit Setup
-![Set Up](setup.PNG)
+![Set Up](Images/wiringDiagram.PNG)
 > Wiring Diagram
 
 ## Status
