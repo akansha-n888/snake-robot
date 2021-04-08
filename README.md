@@ -28,4 +28,4 @@ The purpose of this project is to implement an autonomous continuum robot using 
 Project is: _finished_
 
 ## Contact
-Created by [@akansha-n888](https://www.linkedin.com/in/akansha-nagar/) - feel free to contact me or other in my team!
+Created by [@akansha-n888](https://www.linkedin.com/in/akansha-nagar/) - feel free to contact me or others on my team!
