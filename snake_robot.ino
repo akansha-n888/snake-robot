@@ -15,6 +15,9 @@ double Kp = 0.89, Ki = 0.005, Kd = 0.007;    //subject to change bc of tuning
 
 PID PID_control(&Input, &Output, &SetPoint, Kp, Ki, Kd, DIRECT);
 
+// Response Time Parameters
+unsigned long myTime;
+
 
 //Ultrasonic Sensor Parameters
 // external ultrasonic sensor calibration
@@ -45,13 +48,16 @@ void setup() {
   PID_control.SetOutputLimits(-255,255);
 
   // Serial Monitor
-  Serial.begin(115200);                //change depending on baud rate of python radar code, 115200
-  Serial.println("Radar Start");
+  Serial.begin(9600);                //change depending on baud rate of python radar code, 115200
+ // Serial.println("Radar Start");
 
 }
 
 void loop() {
-
+ 
+ // Serial.print("Time: ");
+ // myTime = millis();
+  
   distance = calculateDistance();
   Input = distance;
   SetPoint = distanceThreshold;
@@ -145,6 +151,8 @@ void loop() {
   Serial.println(SetPoint);
   delay(10);
   */
+
+ // Serial.println(myTime);
 }
 
 float calculateDistance() {
