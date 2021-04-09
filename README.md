@@ -17,6 +17,8 @@ The purpose of this project is to implement an autonomous continuum robot using 
 * Arduino PID Library- version 1.2.0 - by [Brett Beauregard ](https://github.com/br3ttb/Arduino-PID-Library)
 * Radar Emulator - by [Makers Portal](https://makersportal.com/blog/2020/3/26/arduino-raspberry-pi-radar)
 
+## Prototype Progress
+> [Google Drive Shareable Link](https://drive.google.com/drive/folders/1fFWRTeq3_TvGgmDyKvJH5Gbem1vMniiA?usp=sharing)
 ## Final Prototype
 ![Schematic](Images/snake.PNG)
 > Snake Robot Fast Prototype (Open Top View)
