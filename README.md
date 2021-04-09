@@ -18,8 +18,8 @@ The purpose of this project is to implement an autonomous continuum robot using 
 * Radar Emulator - by [Makers Portal](https://makersportal.com/blog/2020/3/26/arduino-raspberry-pi-radar)
 
 ## Design Schematic
-![Schematic](schematic.PNG)
-> Schematic for Slider Crank Mechanism
+![Schematic](Images/CADsnake.PNG)
+> Snake Robot CAD
 
 ## Circuit Setup
 ![Set Up](Images/wiringDiagram.PNG)
