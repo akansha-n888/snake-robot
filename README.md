@@ -4,6 +4,7 @@
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
+* [Prototype Progress](#prototype-progress)
 * [Final Prototype](#final-prototype)
 * [Circuit Setup](#circuit-setup)
 * [Status](#status)
@@ -19,6 +20,7 @@ The purpose of this project is to implement an autonomous continuum robot using 
 
 ## Prototype Progress
 > [Google Drive Shareable Link](https://drive.google.com/drive/folders/1fFWRTeq3_TvGgmDyKvJH5Gbem1vMniiA?usp=sharing)
+
 ## Final Prototype
 ![Schematic](Images/snake.PNG)
 > Snake Robot Fast Prototype (Open Top View)
