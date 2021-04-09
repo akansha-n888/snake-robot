@@ -29,6 +29,8 @@ The purpose of this project is to implement an autonomous continuum robot using 
 Project is: _finished_
 
 ## Contact
-Created by [@akansha-n888](https://www.linkedin.com/in/akansha-nagar/)
-[Dr. Ken Lunde](mailto:lunde@adobe.com?subject=[GitHub]%20Source%20Han%20Sans)
+> Created by [@akansha-n888](https://www.linkedin.com/in/akansha-nagar/)
+> [Sujan Sribalan](mailto:sujan.sribalan@ryerson.ca?subject=[GitHub]%20Source%20Han%20Sans)
+> [Connor Bouwmans](mailto:cbouwmans@ryerson.ca?subject=[GitHub]%20Source%20Han%20Sans)
+> [Saran Gnanapandithan](mailto:saran.gnanapandithan@ryerson.ca?subject=[GitHub]%20Source%20Han%20Sans)
 feel free to contact me or others on my team!
