@@ -22,7 +22,7 @@ The purpose of this project is to implement an autonomous continuum robot using 
 > Snake Robot CAD
 
 ## Circuit Setup
-![Set Up](Images/wiringDiagram.PNG | 250x250)
+![Set Up](Images/wiringDiagram.PNG = 250x250)
 > Wiring Diagram
 
 ## Status
