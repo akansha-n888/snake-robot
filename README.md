@@ -18,7 +18,7 @@ The purpose of this project is to implement an autonomous continuum robot using 
 * Radar Emulator - by [Makers Portal](https://makersportal.com/blog/2020/3/26/arduino-raspberry-pi-radar)
 
 ## Design Schematic
-![Schematic](Images/CADsnake.PNG)
+![Schematic](Images/snake.PNG)
 > Snake Robot CAD
 
 ## Circuit Setup
