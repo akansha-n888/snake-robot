@@ -30,7 +30,7 @@ The purpose of this project is to implement an autonomous continuum robot using 
 > Wiring Diagram
 
 ## Youtube Video
-![Snake Robot Proof of Concept (Search & Rescue)](https://youtu.be/UgJDNK_gTlU)
+[Snake Robot Proof of Concept (Search & Rescue)](https://youtu.be/UgJDNK_gTlU)
 
 ## Status
 Project is: _finished_
