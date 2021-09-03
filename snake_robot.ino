@@ -6,8 +6,8 @@
 Servo servo1;                         // servo1 - move two phase memeber
 Servo servo2;                         // servo2 - move two phase member
 Servo servo3;                         // servo3 - orient snake upward
-int pos = 0;                          // variable to store the servo position (1 & 2)
-int i = 0;                            // variable to store servo 3 position
+int pos;                              // variable to store the servo position (1 & 2)
+int i;                                // variable to store servo 3 position
 
 //PID Parameters
 double SetPoint, Input, Output;
@@ -25,7 +25,7 @@ const int trigPin = 3;            //digital pins
 const int echoPin = 2;            // digital pins
 float duration;
 double distance;
-double distanceThreshold = 30.0;           //distance threshold is 30 cm - subject to change
+double distanceThreshold = 12.0;           //distance threshold is 30 cm - subject to change
 
 //Mircophone Sensor Parameters
 // external sound sensor calibration
@@ -56,46 +56,16 @@ void loop() {
   SetPoint = distanceThreshold;
   PID_control.Compute();              //calculates the Output Value
   SoundSensorval = analogRead(SoundSensor);
-  /*-----------------------------------------SERVO MOVE SNAKE FORWARD-------------------------------------------*/
- if( distance > distanceThreshold ){       //distance > distanceThreshold 
-  for (pos = 0; pos <= 180; pos += 10) { // goes from 0 degrees to 180 degrees
-    // in steps of 1 degree
-    servo1.write(pos);              // tell servo to go to position in variable 'pos'
-    servo2.write(pos);              // tell servo to go to position in variable 'pos'
-   /* delay(10);                                  
-    Serial.print("Distance from Target:");      
-    Serial.println(distance);                   
-    delay(10);      */                           
-  }
-  for (pos = 180; pos >= 0; pos = 10) { // goes from 180 degrees to 0 degrees
-    servo1.write(pos);              // tell servo to go to position in variable 'pos'
-    servo2.write(pos);              // tell servo to go to position in variable 'pos'                               
-    } 
- }
 
- /*------------------------------------DON'T LET SNAKE MOVE---------------------------------------------------------*/
- if( distance < distanceThreshold || Output > Input){
-    servo1.write(pos);              // tell servo to go to position in variable 'pos'
-    servo2.write(pos);              // tell servo to go to position in variable 'pos'
-    /*Serial.print("Distance from Target (Less):");       
-    Serial.println(distance);                           
-    delay(10); */                                         
-  }
-   /*----------------------------------------SWEEP SERRVO FOR RADAR-------------------------------------------------*/ 
- if(distance <= distanceThreshold  && SoundSensorval >= SoundThreshold){ 
-  
-  for(i = 0; i <= 180; i++){      // rotates the servo motor from 0 to 180 degrees, use i to distguish from servo1 and servo2 at base
-    servo3.write(i);
-    delay(300);  
-  }
-  
-    Serial.print("Sound Sensor Value:");
-    Serial.print(SoundSensorval); 
-  }
-  
-  /*---------------------------------serial plot to match input and setpoint for PID tuning-------------------------- */
+  Serial.print("Distance:");      
+  Serial.print(distance);
+  Serial.print(" , ");  
+  Serial.print("Sound Sensor Value:");
+  Serial.println(SoundSensorval);
 
-/*  Serial.print("Input:");
+    /*---------------------------------serial plot to match input and setpoint for PID tuning-------------------------- */
+/*
+  Serial.print("Input:");
   Serial.print(Input);
   Serial.print("  ");
   delay(10);
@@ -109,6 +79,28 @@ void loop() {
   Serial.println(SetPoint);
   delay(10); */
   
+    
+  /*-----------------------------------------SERVO MOVE SNAKE FORWARD-------------------------------------------*/
+ if( Input > SetPoint ){       //distance > distanceThreshold 
+  for (pos = 0; pos <= 180; pos += 10) { // goes from 0 degrees to 180 degrees
+    servo1.write(pos);              // tell servo to go to position in variable 'pos'
+    servo2.write(pos);              // tell servo to go to position in variable 'pos'                                                                               
+  }
+ }
+
+ /*------------------------------------DON'T LET SNAKE MOVE---------------------------------------------------------*/
+ if(Input < SetPoint){      //distance < distanceThreshold ||
+    servo1.write(pos);              // tell servo to go to position in variable 'pos'
+    servo2.write(pos);              // tell servo to go to position in variable 'pos'                                        
+  }
+   /*----------------------------------------SWEEP SERRVO FOR RADAR-------------------------------------------------*/ 
+ if(distance <= distanceThreshold  && SoundSensorval >= SoundThreshold){ 
+  
+  for(i = 0; i <= 180; i++){      // rotates the servo motor from 0 to 180 degrees, use i to distguish from servo1 and servo2 at base
+    servo3.write(i);
+    delay(100);  
+    }
+  }
 }
 
 /*------------------------------------------ distance function -----------------------------------------------------*/
