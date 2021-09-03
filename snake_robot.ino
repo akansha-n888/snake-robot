@@ -1,5 +1,4 @@
 /* autonomous snake robot with basic sensing capabilities*/
-/*MEC825 - CAPSTONE*/
 #include <Servo.h>
 #include <PID_v1.h>
 
@@ -7,7 +6,8 @@
 Servo servo1;                         // servo1 - move two phase memeber
 Servo servo2;                         // servo2 - move two phase member
 Servo servo3;                         // servo3 - orient snake upward
-int pos = 0;                          // variable to store the servo position
+int pos = 0;                          // variable to store the servo position (1 & 2)
+int i = 0;                            // variable to store servo 3 position
 
 //PID Parameters
 double SetPoint, Input, Output;
@@ -21,18 +21,17 @@ unsigned long myTime;
 
 //Ultrasonic Sensor Parameters
 // external ultrasonic sensor calibration
-const int trigPin = 4;
-const int echoPin = 5;
+const int trigPin = 3;            //digital pins
+const int echoPin = 2;            // digital pins
 float duration;
 double distance;
 double distanceThreshold = 30.0;           //distance threshold is 30 cm - subject to change
 
 //Mircophone Sensor Parameters
 // external sound sensor calibration
-int SoundSensor = A0;
-double SoundThreshold = 900;               // threshold value from sound threshold calibration
-double SoundSensorvalNM,SoundSensorvalM,SoundSensorval;
-
+int SoundSensor = A0;                       //convert AC eletrical signals - analog
+double SoundThreshold = 800;               // threshold value from sound threshold calibration
+double SoundSensorval;
  
 void setup() {
   servo1.attach(9);                   // attaches the servo on pin 9 to the servo object
@@ -45,99 +44,61 @@ void setup() {
   //PID control
   PID_control.SetMode(AUTOMATIC);     
   PID_control.SetTunings(Kp, Ki, Kd);
-  PID_control.SetOutputLimits(-255,255);
 
   // Serial Monitor
   Serial.begin(9600);                //change depending on baud rate of python radar code, 115200
- // Serial.println("Radar Start");
 
 }
 
 void loop() {
- 
- // Serial.print("Time: ");
- // myTime = millis();
-  
   distance = calculateDistance();
   Input = distance;
   SetPoint = distanceThreshold;
-  PID_control.Compute();              //calculates the Ouput Value
+  PID_control.Compute();              //calculates the Output Value
   SoundSensorval = analogRead(SoundSensor);
-
   /*-----------------------------------------SERVO MOVE SNAKE FORWARD-------------------------------------------*/
- if( distance > distanceThreshold || Output != 0){       //distance > distanceThreshold
+ if( distance > distanceThreshold ){       //distance > distanceThreshold 
   for (pos = 0; pos <= 180; pos += 10) { // goes from 0 degrees to 180 degrees
     // in steps of 1 degree
     servo1.write(pos);              // tell servo to go to position in variable 'pos'
     servo2.write(pos);              // tell servo to go to position in variable 'pos'
-    //delay(10);
-    //Serial.print("Distance from Target:");
-    //Serial.println(distance);
-    //delay(10);
+   /* delay(10);                                  
+    Serial.print("Distance from Target:");      
+    Serial.println(distance);                   
+    delay(10);      */                           
   }
-  for (pos = 180; pos >= 0; pos -= 10) { // goes from 180 degrees to 0 degrees
+  for (pos = 180; pos >= 0; pos = 10) { // goes from 180 degrees to 0 degrees
     servo1.write(pos);              // tell servo to go to position in variable 'pos'
-    servo2.write(pos);              // tell servo to go to position in variable 'pos'
-   // delay(10);
-    //Serial.print("Distance from Target:");
-    //Serial.println(distance);
-    //delay(10);
+    servo2.write(pos);              // tell servo to go to position in variable 'pos'                               
     } 
  }
 
  /*------------------------------------DON'T LET SNAKE MOVE---------------------------------------------------------*/
- if( distance < distanceThreshold || Output == 0){
+ if( distance < distanceThreshold || Output > Input){
     servo1.write(pos);              // tell servo to go to position in variable 'pos'
     servo2.write(pos);              // tell servo to go to position in variable 'pos'
-    //Serial.print("Distance from Target (Less):");
-    //Serial.println(distance);
-    //delay(10);
+    /*Serial.print("Distance from Target (Less):");       
+    Serial.println(distance);                           
+    delay(10); */                                         
   }
    /*----------------------------------------SWEEP SERRVO FOR RADAR-------------------------------------------------*/ 
  if(distance <= distanceThreshold  && SoundSensorval >= SoundThreshold){ 
-
-  // rotates the servo motor from 0 to 180 degrees
-  for(int i=0;i<=180;i++){  
-  servo3.write(i);
-  delay(30);
-  distance = calculateDistance();// Calls a function for calculating the distance measured by the Ultrasonic sensor for each degree
-  Serial.print(i);
-  Serial.print(","); // comma separate variables
-  Serial.println(distance); // print distance in cm
   
+  for(i = 0; i <= 180; i++){      // rotates the servo motor from 0 to 180 degrees, use i to distguish from servo1 and servo2 at base
+    servo3.write(i);
+    delay(30);  
   }
-  // Repeats the previous lines from 180 to 0 degrees
-  for(int i=180;i>0;i--){  
-  servo3.write(i);
-  delay(30);
-  distance = calculateDistance();
-  Serial.print(i);
-  Serial.print(","); // comma separate variables
-  Serial.println(distance); // print distance in cm
-    }
+     
+    /*Serial.print("Servo Position:");
+    Serial.print(i);
+    Serial.print("  ");
+    Serial.print("Sound Sensor Value:");
+    Serial.println(SoundSensorval); */
   }
+  
+  /*---------------------------------serial plot to match input and setpoint for PID tuning-------------------------- */
 
-    //Serial.print("Sound Sensor Value:");
-   // Serial.print(SoundSensorval);
-    //Serial.print("  ");
-    //delay(10);
-    //Serial.print("Distance from Target:");
-    //Serial.println(distance);
-
-    //distance = calculateDistance(); // Calls a function for calculating the distance measured by the Ultrasonic sensor for each degree
-    //Serial.print("Sound Sensor Value:");
-    //Serial.print(SoundSensorval);
-    //Serial.print("  ");
-    //delay(10);
-    //Serial.print("Distance from Target:");
-    //Serial.println(distance);
-
-
-    
-    
-  /*---------------------------------serial plot to match input and setpoint for PID tuning-------------------------- 
-
-  Serial.print("Input:");
+/*  Serial.print("Input:");
   Serial.print(Input);
   Serial.print("  ");
   delay(10);
@@ -149,19 +110,18 @@ void loop() {
 
   Serial.print("SetPoint:");
   Serial.println(SetPoint);
-  delay(10);
-  */
-
- // Serial.println(myTime);
+  delay(10); */
+  
 }
 
-float calculateDistance() {
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigPin, HIGH);
+/*------------------------------------------ distance function -----------------------------------------------------*/
+float calculateDistance() {       
+  digitalWrite(trigPin, LOW);         //clear trig pin
+  delayMicroseconds(2);               //in low state for 2 micro seconds
+  digitalWrite(trigPin, HIGH);        
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
   duration = pulseIn(echoPin, HIGH);
-  distance = duration * 0.034 / 2;
+  distance = duration * 0.034/2;        //340 m/s speed of sound
   return distance;
 }
