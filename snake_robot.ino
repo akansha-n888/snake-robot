@@ -86,14 +86,11 @@ void loop() {
   
   for(i = 0; i <= 180; i++){      // rotates the servo motor from 0 to 180 degrees, use i to distguish from servo1 and servo2 at base
     servo3.write(i);
-    delay(30);  
+    delay(300);  
   }
-     
-    /*Serial.print("Servo Position:");
-    Serial.print(i);
-    Serial.print("  ");
+  
     Serial.print("Sound Sensor Value:");
-    Serial.println(SoundSensorval); */
+    Serial.print(SoundSensorval); 
   }
   
   /*---------------------------------serial plot to match input and setpoint for PID tuning-------------------------- */
