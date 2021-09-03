@@ -37,7 +37,7 @@ double SoundSensorvalNM,SoundSensorvalM,SoundSensorval;
 void setup() {
   servo1.attach(9);                   // attaches the servo on pin 9 to the servo object
   servo2.attach(10);                  // attaches the servo on pin 10 to the servo object
-  servo3.attach(11);                  // attaches the servo on pin 10 to the servo object
+  servo3.attach(11);                  // attaches the servo on pin 11 to the servo object
   pinMode(trigPin, OUTPUT);           //ultrasonic sensor trig pin
   pinMode(echoPin, INPUT);            //ultrasonic sensor echo pin
   pinMode(SoundSensor,INPUT);         //sound sensor analog - can also use digital pin
